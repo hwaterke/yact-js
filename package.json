@@ -1,0 +1,8 @@
+{
+  "name": "config-cli",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:hwaterke/config-cli.git",
+  "author": "Harold Waterkeyn",
+  "license": "MIT"
+}

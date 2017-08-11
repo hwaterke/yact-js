@@ -1,2 +1,2 @@
 # config-cli
-CLI to help configure new javascript and node projects
+CLI to help configure new JavaScript and node projects.
