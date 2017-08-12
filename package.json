@@ -1,12 +1,12 @@
 {
-  "name": "config-cli",
+  "name": "fixus-js",
   "version": "0.0.1",
   "main": "index.js",
-  "repository": "git@github.com:hwaterke/config-cli.git",
+  "repository": "git@github.com:hwaterke/fixus-js.git",
   "author": "Harold Waterkeyn",
   "license": "MIT",
   "bin": {
-    "jsconfig": "./build/index.js"
+    "fixus-js": "./build/index.js"
   },
   "scripts": {
     "prebuild": "rm -r build || true",
