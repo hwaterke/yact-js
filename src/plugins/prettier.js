@@ -6,12 +6,11 @@ import {
 } from '../helpers/package';
 import {yarnInstall} from '../helpers/yarn';
 
-export class PrettierModule {
-  flag = 'prettier';
+const PRETTIER_ARGS = '--single-quote --bracket-spacing=false';
 
-  description = 'Configures prettier and precommit hooks';
-
-  PRETTIER_ARGS = '--single-quote --bracket-spacing=false';
+export class PrettierPlugin {
+  static flag = 'prettier';
+  static description = 'Configures prettier and precommit hooks';
 
   async run() {
     await yarnInstall(['prettier', 'lint-staged', 'husky'], true);
@@ -19,21 +18,21 @@ export class PrettierModule {
     // Update package.json
     const packageJson = getPackageJson();
     packageJson['lint-staged'] = {
-      '*.js': [`prettier --write ${this.PRETTIER_ARGS}`, 'git add']
+      '*.js': [`prettier --write ${PRETTIER_ARGS}`, 'git add']
     };
 
     console.log('eslint?', hasDependency(packageJson, 'eslint'));
 
     if (hasDependency(packageJson, 'eslint')) {
       packageJson['lint-staged'] = {
-        '*.js': [`prettier --write ${this.PRETTIER_ARGS}`, 'eslint', 'git add']
+        '*.js': [`prettier --write ${PRETTIER_ARGS}`, 'eslint', 'git add']
       };
     }
 
     setScriptIfMissing(
       packageJson,
       'format',
-      `prettier ${this.PRETTIER_ARGS} --write 'src/**/*.js'`
+      `prettier ${PRETTIER_ARGS} --write 'src/**/*.js'`
     );
     setScriptIfMissing(packageJson, 'precommit', 'lint-staged');
     setPackageJson(packageJson);

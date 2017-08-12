@@ -9,6 +9,7 @@
     "fixus-js": "./build/index.js"
   },
   "scripts": {
+    "prepublishOnly": "yarn build",
     "prebuild": "rm -r build || true",
     "build": "babel src --copy-files --out-dir build",
     "format": "prettier --single-quote --bracket-spacing=false --write 'src/**/*.js'",
