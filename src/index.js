@@ -2,11 +2,18 @@
 import program from 'commander';
 import chalk from 'chalk';
 import {ensurePackageJson} from './helpers/package';
-import {PrettierPlugin} from './plugins/prettier';
-import {BabelNodePlugin} from './plugins/babel-node';
+import {PrettierPlugin} from './plugins/prettier/prettier';
+import {BabelNodePlugin} from './plugins/babel-node/babel-node';
+import {ReactRewiredBabelPlugin} from './plugins/react-rewired-babel/react-rewired-babel';
+import {EslintPlugin} from './plugins/eslint/eslint';
 
 // Add new plugins here.
-const PLUGINS = [BabelNodePlugin, PrettierPlugin];
+const PLUGINS = [
+  BabelNodePlugin,
+  PrettierPlugin,
+  EslintPlugin,
+  ReactRewiredBabelPlugin
+];
 
 async function runPlugin(plugin) {
   console.log(chalk.blue(`Running ${plugin.name}`));

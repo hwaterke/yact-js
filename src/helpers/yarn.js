@@ -2,6 +2,7 @@ import {execSync} from 'child_process';
 import spawn from 'cross-spawn';
 import chalk from 'chalk';
 import {stopWithError} from './basic';
+import {getPackageJson, hasDependency} from './package';
 
 export function shouldUseYarn() {
   try {
@@ -9,6 +10,18 @@ export function shouldUseYarn() {
     return true;
   } catch (e) {
     return false;
+  }
+}
+
+export function yarnInstallMissing(
+  dependencies,
+  isDev = false,
+  verbose = false
+) {
+  const packageJson = getPackageJson();
+  const missingDeps = dependencies.filter(d => !hasDependency(packageJson, d));
+  if (missingDeps.length > 0) {
+    yarnInstall(missingDeps, isDev, verbose);
   }
 }
 

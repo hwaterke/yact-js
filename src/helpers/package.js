@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
-import {stopWithError} from './basic';
+import chalk from 'chalk';
+import {stopWithError, askValue} from './basic';
 
 const PACKAGE = 'package.json';
 
@@ -37,13 +38,28 @@ export function setScript(packageJson, name, content) {
   if (!packageJson.scripts) {
     packageJson.scripts = {};
   }
-  packageJson.scripts[name] = content;
-}
 
-export function setScriptIfMissing(packageJson, name, content) {
-  if (getScript(packageJson, name) === undefined) {
-    setScript(packageJson, name, content);
+  if (packageJson.scripts[name] && packageJson.scripts[name] != content) {
+    console.log(chalk.yellow(`Script ${name} already contains:`));
+    console.log(chalk.blue(` > ${packageJson.scripts[name]}`));
+    console.log(chalk.yellow('instead of'));
+    console.log(chalk.blue(` > ${content}`));
+    const value = askValue(chalk.yellow('Do you want to replace it? [y/N]: '), [
+      'y',
+      'n',
+      'yes',
+      'no',
+      ''
+    ]);
+    if (['y', 'yes'].includes(value)) {
+      console.log('Replacing script');
+    } else if (['', 'n', 'no'].includes(value)) {
+      console.log('Skipping');
+      return;
+    }
   }
+
+  packageJson.scripts[name] = content;
 }
 
 /**
