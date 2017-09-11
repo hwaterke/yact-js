@@ -1,15 +1,15 @@
-# fixus-js
+# yact-js
 
-fixus-js is a CLI tool to help configure new or existing JavaScript and node projects.
+yact-js (Yet Another Configuration Tool) is a CLI tool to help configure new or existing JavaScript and node projects.
 
 ## Install
 
 ```
-npm install -g fixus-js
+npm install -g yact-js
 ```
 
 ## Usage
 
 ```
-fixus-js --help
+yact --help
 ```

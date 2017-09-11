@@ -1,12 +1,12 @@
 {
-  "name": "fixus-js",
-  "version": "0.0.1",
+  "name": "yact-js",
+  "version": "0.1.0",
   "main": "index.js",
-  "repository": "git@github.com:hwaterke/fixus-js.git",
+  "repository": "git@github.com:hwaterke/yact-js.git",
   "author": "Harold Waterkeyn",
   "license": "MIT",
   "bin": {
-    "fixus-js": "./build/index.js"
+    "yact": "./build/index.js"
   },
   "scripts": {
     "prepublishOnly": "yarn build",
@@ -38,7 +38,7 @@
   "lint-staged": {
     "*.js": [
       "prettier --write --single-quote --bracket-spacing=false",
-      "eslint",
+      "eslint --max-warnings 1",
       "git add"
     ]
   }
