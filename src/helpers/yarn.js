@@ -1,10 +1,9 @@
 import {execSync} from 'child_process';
 import spawn from 'cross-spawn';
 import chalk from 'chalk';
-import {stopWithError} from './basic';
 import {getPackageJson, hasDependency} from './package';
 
-export function shouldUseYarn() {
+export function isYarnAvailable() {
   try {
     execSync('yarnpkg --version', {stdio: 'ignore'});
     return true;
@@ -25,36 +24,30 @@ export function yarnInstallMissing(
   }
 }
 
-export function yarnInstall(dependencies, isDev = false, verbose = false) {
+export function yarnInstall(dependencies, isDev = false) {
   // Fail if yarn is not installed
-  if (!shouldUseYarn()) {
-    stopWithError('Yarn is not installed.');
-  }
+  const withYarn = isYarnAvailable();
 
   return new Promise((resolve, reject) => {
-    let command;
-    let args;
+    const command = withYarn ? 'yarnpkg' : 'npm';
 
-    command = 'yarnpkg';
-    args = ['add'];
-    [].push.apply(args, dependencies);
-
-    if (isDev) {
-      args.push('--dev');
-    }
-
-    if (verbose) {
-      args.push('--verbose');
+    let args = [isDev ? '--save-dev' : '--save'];
+    if (withYarn) {
+      args = ['add'];
+      if (isDev) {
+        args.push('--dev');
+      }
     }
 
     console.log(chalk.yellow(`Installing ${dependencies.join(', ')}`));
 
-    const child = spawn(command, args, {stdio: 'inherit'});
+    const child = spawn(command, [...args, ...dependencies], {
+      stdio: 'inherit'
+    });
+
     child.on('close', code => {
       if (code !== 0) {
-        reject({
-          command: `${command} ${args.join(' ')}`
-        });
+        reject('Error installing dependencies');
         return;
       }
       resolve();
