@@ -1,14 +1,8 @@
 {
   "presets": [
-    [
-      "env",
-      {
-        "targets": {
-          "node": "current"
-        }
-      }
-    ],
-    "stage-3"
+    "env"
   ],
-  "plugins": ["transform-class-properties"]
+  "plugins": [
+    "transform-class-properties"
+  ]
 }
