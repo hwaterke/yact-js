@@ -29,7 +29,10 @@ export class BabelNodePlugin {
 
     // Check if build/ is in .gitignore
     if (fs.existsSync(GITIGNORE)) {
-      const gitignore = fs.readFileSync(GITIGNORE).split('\n');
+      const gitignore = fs
+        .readFileSync(GITIGNORE)
+        .toString()
+        .split('\n');
       if (!gitignore.includes('build/')) {
         fs.appendFileSync(GITIGNORE, 'build/');
       }

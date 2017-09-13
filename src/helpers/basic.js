@@ -20,9 +20,9 @@ export function copyFile(source, destination) {
 
     if (value === 'd') {
       console.log(chalk.blue('- Current content'));
-      console.log(fs.readFileSync(destination.toString()));
+      console.log(fs.readFileSync(destination).toString());
       console.log(chalk.blue('- New content'));
-      console.log(fs.readFileSync(source.toString()));
+      console.log(fs.readFileSync(source).toString());
       value = askValue('Do you want to replace it? [yN]: ', [
         'y',
         'yes',
