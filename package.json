@@ -15,6 +15,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
     "chalk": "^2.1.0",
     "commander": "^2.11.0",
     "cross-spawn": "^5.1.0",
