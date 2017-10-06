@@ -15,12 +15,29 @@ export class EslintPlugin {
 
   async run() {
     const isCRA = hasDependency(getPackageJson(), 'react-scripts');
+    const isRN = hasDependency(getPackageJson(), 'react-native');
 
     // In a create-react-app environment we do not need to install eslint
     if (isCRA) {
       await yarnInstallMissing(['lint-staged', 'husky'], true);
       copyFile(
         path.join(__dirname, 'data', 'eslintrc.react.json'),
+        './.eslintrc.json'
+      );
+    } else if (isRN) {
+      await yarnInstallMissing(
+        [
+          'lint-staged',
+          'husky',
+          'eslint',
+          'babel-eslint',
+          'eslint-plugin-import',
+          'eslint-plugin-react'
+        ],
+        true
+      );
+      copyFile(
+        path.join(__dirname, 'data', 'eslintrc.react-native.json'),
         './.eslintrc.json'
       );
     } else {
