@@ -15,6 +15,10 @@
     "sourceType": "module"
   },
   "rules": {
+    "curly": [
+      "error",
+      "all"
+    ],
     "linebreak-style": [
       "error",
       "unix"
