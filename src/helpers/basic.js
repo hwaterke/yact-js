@@ -40,6 +40,7 @@ export function copyFile(source, destination) {
     console.log('Replacing file');
   }
   fs.copySync(source, destination);
+  console.log(chalk.blue(`Added file ${destination}`));
 }
 
 export function askValue(prompt, options) {
