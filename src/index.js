@@ -6,13 +6,15 @@ import {PrettierPlugin} from './plugins/prettier/prettier';
 import {BabelNodePlugin} from './plugins/babel-node/babel-node';
 import {ReactRewiredBabelPlugin} from './plugins/react-rewired-babel/react-rewired-babel';
 import {EslintPlugin} from './plugins/eslint/eslint';
+import {DockerSPAPlugin} from './plugins/docker-spa/docker-spa';
 
 // Add new plugins here.
 const PLUGINS = [
   BabelNodePlugin,
   PrettierPlugin,
   EslintPlugin,
-  ReactRewiredBabelPlugin
+  ReactRewiredBabelPlugin,
+  DockerSPAPlugin
 ];
 
 async function runPlugin(plugin) {
