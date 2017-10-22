@@ -32,6 +32,11 @@ Fortunately, `react-app-rewired` allows you to patch the webpack config without 
 Working on a Node app? Missing the `import` statements?
 `yact --babelnode` will configure babel and add the required scripts to compile your projects.
 
+### Docker Build for SPAs
+Working on a Single Page Application and you need a docker image of it?
+`yact --dockerspa` will add a Dockerfile to your project aswell as a build:docker script.
+This image will be a static Nginx Proxy hosting your app on localhost:80
+
 ## Need more?
 
 Please create an issue or even better a pull request if you want more configuration plugins.
