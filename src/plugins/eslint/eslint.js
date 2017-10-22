@@ -19,7 +19,10 @@ export class EslintPlugin {
 
     // In a create-react-app environment we do not need to install eslint
     if (isCRA) {
-      await yarnInstallMissing(['lint-staged', 'husky'], true);
+      await yarnInstallMissing(
+        ['lint-staged', 'husky', 'eslint-plugin-react'],
+        true
+      );
       copyFile(
         path.join(__dirname, 'data', 'eslintrc.react.json'),
         './.eslintrc.json'
