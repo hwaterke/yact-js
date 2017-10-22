@@ -12,6 +12,7 @@ const DEPENDENCIES = [
 ];
 
 const GITIGNORE = '.gitignore';
+const SRC_DIRECTORY = 'src';
 
 export class BabelNodePlugin {
   static flag = 'babelnode';
@@ -36,6 +37,15 @@ export class BabelNodePlugin {
       if (!gitignore.includes('build/')) {
         fs.appendFileSync(GITIGNORE, 'build/');
       }
+    }
+
+    // Check if src/index.js is present
+    if (!fs.existsSync(SRC_DIRECTORY)) {
+      fs.mkdirSync(SRC_DIRECTORY);
+      fs.writeFileSync(
+        path.join(SRC_DIRECTORY, 'index.js'),
+        "console.log('Hello, world!');"
+      );
     }
   }
 }
