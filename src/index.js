@@ -7,6 +7,7 @@ import {BabelNodePlugin} from './plugins/babel-node/babel-node';
 import {ReactRewiredBabelPlugin} from './plugins/react-rewired-babel/react-rewired-babel';
 import {EslintPlugin} from './plugins/eslint/eslint';
 import {DockerSPAPlugin} from './plugins/docker-spa/docker-spa';
+import {version} from '../package.json';
 
 // Add new plugins here.
 const PLUGINS = [
@@ -25,7 +26,7 @@ async function runPlugin(plugin) {
 }
 
 // Commander
-let configuredProgram = program.version('0.0.1');
+let configuredProgram = program.version(version);
 PLUGINS.forEach(pl => {
   configuredProgram = configuredProgram.option(`--${pl.flag}`, pl.description);
 });
