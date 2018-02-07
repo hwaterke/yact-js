@@ -11,7 +11,7 @@
     "prepublishOnly": "yarn build",
     "prebuild": "rm -r build || true",
     "build": "babel src --copy-files --out-dir build",
-    "format": "prettier --single-quote --bracket-spacing=false --write 'src/**/*.js'",
+    "format": "prettier --write 'src/**/*.js'",
     "precommit": "lint-staged"
   },
   "dependencies": {
@@ -38,7 +38,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "prettier --write --single-quote --bracket-spacing=false",
+      "prettier --write",
       "eslint --max-warnings 1",
       "git add"
     ]
