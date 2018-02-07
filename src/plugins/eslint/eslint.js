@@ -1,32 +1,32 @@
-import path from 'path';
+import path from 'path'
 import {
   getPackageJson,
   setPackageJson,
   hasDependency,
-  setScript
-} from '../../helpers/package';
-import {yarnInstallMissing} from '../../helpers/yarn';
-import {addLintStagedCommand} from '../../helpers/lintStaged';
-import {copyFile} from '../../helpers/basic';
+  setScript,
+} from '../../helpers/package'
+import {yarnInstallMissing} from '../../helpers/yarn'
+import {addLintStagedCommand} from '../../helpers/lintStaged'
+import {copyFile} from '../../helpers/basic'
 
 export class EslintPlugin {
-  static flag = 'eslint';
-  static description = 'Configures eslint and precommit hooks';
+  static flag = 'eslint'
+  static description = 'Configures eslint and precommit hooks'
 
   async run() {
-    const isCRA = hasDependency(getPackageJson(), 'react-scripts');
-    const isRN = hasDependency(getPackageJson(), 'react-native');
+    const isCRA = hasDependency(getPackageJson(), 'react-scripts')
+    const isRN = hasDependency(getPackageJson(), 'react-native')
 
     // In a create-react-app environment we do not need to install eslint
     if (isCRA) {
       await yarnInstallMissing(
         ['lint-staged', 'husky', 'eslint-plugin-react'],
         true
-      );
+      )
       copyFile(
         path.join(__dirname, 'data', 'eslintrc.react.json'),
         './.eslintrc.json'
-      );
+      )
     } else if (isRN) {
       await yarnInstallMissing(
         [
@@ -35,14 +35,14 @@ export class EslintPlugin {
           'eslint',
           'babel-eslint',
           'eslint-plugin-import',
-          'eslint-plugin-react'
+          'eslint-plugin-react',
         ],
         true
-      );
+      )
       copyFile(
         path.join(__dirname, 'data', 'eslintrc.react-native.json'),
         './.eslintrc.json'
-      );
+      )
     } else {
       await yarnInstallMissing(
         [
@@ -50,24 +50,24 @@ export class EslintPlugin {
           'husky',
           'eslint',
           'babel-eslint',
-          'eslint-plugin-import'
+          'eslint-plugin-import',
         ],
         true
-      );
+      )
       copyFile(
         path.join(__dirname, 'data', 'eslintrc.node.json'),
         './.eslintrc.json'
-      );
+      )
     }
 
-    const packageJson = getPackageJson();
+    const packageJson = getPackageJson()
     addLintStagedCommand(
       packageJson,
       'eslint',
       'eslint --max-warnings 1',
       false
-    );
-    setScript(packageJson, 'precommit', 'lint-staged');
-    setPackageJson(packageJson);
+    )
+    setScript(packageJson, 'precommit', 'lint-staged')
+    setPackageJson(packageJson)
   }
 }
