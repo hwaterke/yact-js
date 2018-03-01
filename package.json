@@ -37,10 +37,7 @@
     "prettier": "^1.10.2"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "eslint --max-warnings 1",
-      "git add"
-    ]
+    "*.js": ["prettier --write", "eslint --max-warnings 1", "git add"],
+    "*.{css,scss,json,md}": ["prettier --write", "git add"]
   }
 }
