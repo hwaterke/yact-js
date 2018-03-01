@@ -24,6 +24,12 @@ export class PrettierPlugin {
 
     const packageJson = getPackageJson()
     addLintStagedCommand(packageJson, 'prettier', `prettier --write`)
+    addLintStagedCommand(
+      packageJson,
+      'prettier',
+      `prettier --write`,
+      '*.{css,scss,json,md}'
+    )
     setScript(packageJson, 'format', `prettier --write 'src/**/*.js'`)
     setScript(packageJson, 'precommit', 'lint-staged')
     setPackageJson(packageJson)

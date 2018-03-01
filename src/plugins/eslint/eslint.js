@@ -64,7 +64,8 @@ export class EslintPlugin {
     addLintStagedCommand(
       packageJson,
       'eslint',
-      'eslint --max-warnings 1',
+      'eslint --max-warnings 0',
+      undefined,
       false
     )
     setScript(packageJson, 'precommit', 'lint-staged')
