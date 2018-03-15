@@ -20,8 +20,9 @@ export function yarnInstallMissing(
   const packageJson = getPackageJson()
   const missingDeps = dependencies.filter(d => !hasDependency(packageJson, d))
   if (missingDeps.length > 0) {
-    yarnInstall(missingDeps, isDev, verbose)
+    return yarnInstall(missingDeps, isDev, verbose)
   }
+  return Promise.resolve()
 }
 
 export function yarnInstall(dependencies, isDev = false) {
