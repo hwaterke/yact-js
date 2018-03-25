@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import chalk from 'chalk';
 import {stopWithError, askValue} from './basic';
+import {execSync} from 'child_process';
 
 const PACKAGE = 'package.json';
 
@@ -15,7 +16,21 @@ export const hasPackageJson = () => {
 
 export const ensurePackageJson = () => {
   if (!hasPackageJson()) {
-    stopWithError(`No ${PACKAGE} in current directory`);
+    console.log(chalk.red(`No ${PACKAGE} in current directory`));
+    const value = askValue(
+      chalk.yellow('Do you use to create one for you? [y/N]: '),
+      ['y', 'n', 'yes', 'no', '']
+    );
+    if (['y', 'yes', ''].includes(value)) {
+      console.log(
+        'Creating an empty package.json file using ' +
+          chalk.blue('yarn init -y')
+      );
+      execSync('yarn init -y');
+    } else if (['n', 'no'].includes(value)) {
+      stopWithError('Quitting');
+      return;
+    }
   }
 };
 
