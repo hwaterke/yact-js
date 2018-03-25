@@ -1,14 +1,14 @@
-import {execSync} from 'child_process';
-import spawn from 'cross-spawn';
-import chalk from 'chalk';
-import {getPackageJson, hasDependency} from './package';
+import {execSync} from 'child_process'
+import spawn from 'cross-spawn'
+import chalk from 'chalk'
+import {getPackageJson, hasDependency} from './package'
 
 export function isYarnAvailable() {
   try {
-    execSync('yarnpkg --version', {stdio: 'ignore'});
-    return true;
+    execSync('yarnpkg --version', {stdio: 'ignore'})
+    return true
   } catch (e) {
-    return false;
+    return false
   }
 }
 
@@ -17,40 +17,41 @@ export function yarnInstallMissing(
   isDev = false,
   verbose = false
 ) {
-  const packageJson = getPackageJson();
-  const missingDeps = dependencies.filter(d => !hasDependency(packageJson, d));
+  const packageJson = getPackageJson()
+  const missingDeps = dependencies.filter(d => !hasDependency(packageJson, d))
   if (missingDeps.length > 0) {
-    yarnInstall(missingDeps, isDev, verbose);
+    return yarnInstall(missingDeps, isDev, verbose)
   }
+  return Promise.resolve()
 }
 
 export function yarnInstall(dependencies, isDev = false) {
   // Fail if yarn is not installed
-  const withYarn = isYarnAvailable();
+  const withYarn = isYarnAvailable()
 
   return new Promise((resolve, reject) => {
-    const command = withYarn ? 'yarnpkg' : 'npm';
+    const command = withYarn ? 'yarnpkg' : 'npm'
 
-    let args = [isDev ? '--save-dev' : '--save'];
+    let args = [isDev ? '--save-dev' : '--save']
     if (withYarn) {
-      args = ['add'];
+      args = ['add']
       if (isDev) {
-        args.push('--dev');
+        args.push('--dev')
       }
     }
 
-    console.log(chalk.yellow(`Installing ${dependencies.join(', ')}`));
+    console.log(chalk.yellow(`Installing ${dependencies.join(', ')}`))
 
     const child = spawn(command, [...args, ...dependencies], {
-      stdio: 'inherit'
-    });
+      stdio: 'inherit',
+    })
 
     child.on('close', code => {
       if (code !== 0) {
-        reject('Error installing dependencies');
-        return;
+        reject('Error installing dependencies')
+        return
       }
-      resolve();
-    });
-  });
+      resolve()
+    })
+  })
 }

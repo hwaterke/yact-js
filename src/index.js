@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-import program from 'commander';
-import chalk from 'chalk';
-import {ensurePackageJson} from './helpers/package';
-import {PrettierPlugin} from './plugins/prettier/prettier';
-import {BabelNodePlugin} from './plugins/babel-node/babel-node';
-import {ReactRewiredBabelPlugin} from './plugins/react-rewired-babel/react-rewired-babel';
-import {EslintPlugin} from './plugins/eslint/eslint';
-import {DockerSPAPlugin} from './plugins/docker-spa/docker-spa';
+import program from 'commander'
+import chalk from 'chalk'
+import {ensurePackageJson} from './helpers/package'
+import {PrettierPlugin} from './plugins/prettier/prettier'
+import {BabelNodePlugin} from './plugins/babel-node/babel-node'
+import {ReactRewiredBabelPlugin} from './plugins/react-rewired-babel/react-rewired-babel'
+import {EslintPlugin} from './plugins/eslint/eslint'
+import {DockerSPAPlugin} from './plugins/docker-spa/docker-spa'
+import {version} from '../package.json'
 
 // Add new plugins here.
 const PLUGINS = [
@@ -14,32 +15,32 @@ const PLUGINS = [
   PrettierPlugin,
   EslintPlugin,
   ReactRewiredBabelPlugin,
-  DockerSPAPlugin
-];
+  DockerSPAPlugin,
+]
 
 async function runPlugin(plugin) {
-  console.log(chalk.blue(`Running ${plugin.name}`));
-  const instance = new plugin();
-  await instance.run();
-  console.log(chalk.green(`${plugin.name}: done`));
+  console.log(chalk.blue(`Running ${plugin.name}`))
+  const instance = new plugin()
+  await instance.run()
+  console.log(chalk.green(`${plugin.name}: done`))
 }
 
 // Commander
-let configuredProgram = program.version('0.0.1');
+let configuredProgram = program.version(version)
 PLUGINS.forEach(pl => {
-  configuredProgram = configuredProgram.option(`--${pl.flag}`, pl.description);
-});
-configuredProgram.parse(process.argv);
+  configuredProgram = configuredProgram.option(`--${pl.flag}`, pl.description)
+})
+configuredProgram.parse(process.argv)
 
-ensurePackageJson();
+ensurePackageJson()
 
 // Run selected plugins
 async function runAllPlugins() {
   for (let pl of PLUGINS) {
     if (program[pl.flag]) {
-      await runPlugin(pl);
+      await runPlugin(pl)
     }
   }
 }
 
-runAllPlugins();
+runAllPlugins()
