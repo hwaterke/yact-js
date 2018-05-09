@@ -1,13 +1,14 @@
 #!/usr/bin/env node
-import program from 'commander'
 import chalk from 'chalk'
-import {ensurePackageJson} from './helpers/package'
-import {PrettierPlugin} from './plugins/prettier/prettier'
-import {BabelNodePlugin} from './plugins/babel-node/babel-node'
-import {ReactRewiredBabelPlugin} from './plugins/react-rewired-babel/react-rewired-babel'
-import {EslintPlugin} from './plugins/eslint/eslint'
-import {DockerSPAPlugin} from './plugins/docker-spa/docker-spa'
+import program from 'commander'
 import {version} from '../package.json'
+import {ensurePackageJson} from './helpers/package'
+import {BabelNodePlugin} from './plugins/babel-node/babel-node'
+import {DockerSPAPlugin} from './plugins/docker-spa/docker-spa'
+import {EslintImportOrderPlugin} from './plugins/eslint-import-order'
+import {EslintPlugin} from './plugins/eslint/eslint'
+import {PrettierPlugin} from './plugins/prettier/prettier'
+import {ReactRewiredBabelPlugin} from './plugins/react-rewired-babel/react-rewired-babel'
 
 // Add new plugins here.
 const PLUGINS = [
@@ -16,6 +17,7 @@ const PLUGINS = [
   EslintPlugin,
   ReactRewiredBabelPlugin,
   DockerSPAPlugin,
+  EslintImportOrderPlugin,
 ]
 
 async function runPlugin(plugin) {
