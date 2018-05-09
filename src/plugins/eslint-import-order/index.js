@@ -5,7 +5,7 @@ import {getPackageJson, setPackageJson} from '../../helpers/package'
 import {yarnInstallMissing} from '../../helpers/yarn'
 
 export class EslintImportOrderPlugin {
-  static flag = 'eslint-import'
+  static flag = 'eslintimport'
   static description = 'Configures eslint to auto sort imports'
 
   async run() {
