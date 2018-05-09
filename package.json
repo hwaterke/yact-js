@@ -15,26 +15,27 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
-    "chalk": "^2.3.0",
-    "commander": "^2.14.1",
-    "cross-spawn": "^6.0.4",
-    "fs-extra": "^5.0.0",
-    "lodash": "^4.17.5",
-    "readline-sync": "^1.4.8"
+    "@babel/runtime": "^7.0.0-beta.46",
+    "chalk": "^2.4.1",
+    "commander": "^2.15.1",
+    "cross-spawn": "^6.0.5",
+    "fs-extra": "^6.0.0",
+    "lodash": "^4.17.10",
+    "readline-sync": "^1.4.9"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.2.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-3": "^6.24.1",
-    "eslint": "^4.17.0",
-    "eslint-plugin-import": "^2.8.0",
+    "@babel/cli": "^7.0.0-beta.46",
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.46",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.46",
+    "@babel/preset-env": "^7.0.0-beta.46",
+    "@babel/preset-stage-3": "^7.0.0-beta.46",
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-plugin-import": "^2.11.0",
     "husky": "^0.14.3",
-    "lint-staged": "^6.1.0",
-    "prettier": "^1.10.2"
+    "lint-staged": "^7.1.0",
+    "prettier": "^1.12.1"
   },
   "lint-staged": {
     "*.js": ["prettier --write", "eslint --max-warnings 0", "git add"],
