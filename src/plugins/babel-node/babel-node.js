@@ -1,14 +1,15 @@
 import fs from 'fs-extra'
 import path from 'path'
-import {yarnInstallMissing} from '../../helpers/yarn'
-import {getPackageJson, setPackageJson, setScript} from '../../helpers/package'
 import {copyFile} from '../../helpers/basic'
+import {getPackageJson, setPackageJson, setScript} from '../../helpers/package'
+import {yarnInstallMissing} from '../../helpers/yarn'
 
 const DEPENDENCIES = [
-  'babel-cli',
-  'babel-preset-env',
-  'babel-preset-stage-3',
-  'babel-plugin-transform-class-properties',
+  '@babel/cli',
+  '@babel/core',
+  '@babel/preset-env',
+  '@babel/preset-stage-3',
+  '@babel/plugin-proposal-class-properties',
 ]
 
 const GITIGNORE = '.gitignore'
@@ -26,7 +27,7 @@ export class BabelNodePlugin {
     setScript(pkg, 'build', 'babel src --copy-files --out-dir build')
     setPackageJson(pkg)
 
-    copyFile(path.join(__dirname, 'data', 'babelrc'), './.babelrc')
+    copyFile(path.join(__dirname, 'data', 'babelrc.json'), './.babelrc')
 
     // Check if build/ is in .gitignore
     if (fs.existsSync(GITIGNORE)) {
