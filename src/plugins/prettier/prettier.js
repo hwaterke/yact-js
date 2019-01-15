@@ -28,10 +28,16 @@ export class PrettierPlugin {
       packageJson,
       'prettier',
       `prettier --write`,
-      '*.{css,scss,json,md}'
+      '*.{css,scss,json,md,yml,html}'
     )
     setScript(packageJson, 'format', `prettier --write 'src/**/*.js'`)
-    setScript(packageJson, 'precommit', 'lint-staged')
+
+    packageJson.husky = {
+      hooks: {
+        'pre-commit': 'lint-staged',
+      },
+    }
+
     setPackageJson(packageJson)
   }
 }

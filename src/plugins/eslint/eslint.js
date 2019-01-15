@@ -3,7 +3,6 @@ import {
   getPackageJson,
   setPackageJson,
   hasDependency,
-  setScript,
 } from '../../helpers/package'
 import {yarnInstallMissing} from '../../helpers/yarn'
 import {addLintStagedCommand} from '../../helpers/lintStaged'
@@ -68,7 +67,13 @@ export class EslintPlugin {
       undefined,
       false
     )
-    setScript(packageJson, 'precommit', 'lint-staged')
+
+    packageJson.husky = {
+      hooks: {
+        'pre-commit': 'lint-staged',
+      },
+    }
+
     setPackageJson(packageJson)
   }
 }
