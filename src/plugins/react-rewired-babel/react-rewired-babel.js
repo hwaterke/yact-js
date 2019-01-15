@@ -5,7 +5,8 @@ import {copyFile} from '../../helpers/basic'
 
 export class ReactRewiredBabelPlugin {
   static flag = 'rewirebabel'
-  static description = 'Configures react rewired to allow decorators in create-react-app projects'
+  static description =
+    'Configures react rewired to allow decorators in create-react-app projects'
 
   async run() {
     await yarnInstall(

@@ -8,7 +8,8 @@ const NGINX_SPA = path.join(__dirname, 'data', 'nginx-spa.conf')
 
 export class DockerSPAPlugin {
   static flag = 'dockerspa'
-  static description = 'Configures a docker production build for Single Page App'
+  static description =
+    'Configures a docker production build for Single Page App'
 
   async run() {
     if (fs.existsSync('Dockerfile')) {
