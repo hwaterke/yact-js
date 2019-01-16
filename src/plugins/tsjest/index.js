@@ -10,10 +10,7 @@ export class TsjestPlugin {
   async run() {
     await yarnInstallMissing(['ts-jest', 'jest', '@types/jest'], true)
 
-    copyFile(
-      path.join(__dirname, 'data', 'jest.config.json'),
-      './jest.config.json'
-    )
+    copyFile(path.join(__dirname, 'data', 'jest.config.js'), './jest.config.js')
 
     const packageJson = getPackageJson()
     setScript(packageJson, 'test', 'jest')
