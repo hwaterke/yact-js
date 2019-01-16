@@ -24,13 +24,18 @@ export class PrettierPlugin {
 
     const packageJson = getPackageJson()
     addLintStagedCommand(packageJson, 'prettier', `prettier --write`)
+    addLintStagedCommand(packageJson, 'prettier', `prettier --write`, '*.ts')
     addLintStagedCommand(
       packageJson,
       'prettier',
       `prettier --write`,
       '*.{css,scss,json,md,yml,html}'
     )
-    setScript(packageJson, 'format', `prettier --write 'src/**/*.js'`)
+    setScript(
+      packageJson,
+      'format',
+      `prettier --write 'src/**/*.{js,ts,css,scss,json,md,yml,html}'`
+    )
 
     packageJson.husky = {
       hooks: {
