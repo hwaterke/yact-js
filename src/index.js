@@ -9,6 +9,9 @@ import {EslintImportOrderPlugin} from './plugins/eslint-import-order'
 import {EslintPlugin} from './plugins/eslint/eslint'
 import {PrettierPlugin} from './plugins/prettier/prettier'
 import {ReactRewiredBabelPlugin} from './plugins/react-rewired-babel/react-rewired-babel'
+import {TypescriptNodePlugin} from './plugins/ts-node'
+import {TslintPlugin} from './plugins/tslint'
+import {TsjestPlugin} from './plugins/tsjest'
 
 // Add new plugins here.
 const PLUGINS = [
@@ -18,6 +21,9 @@ const PLUGINS = [
   ReactRewiredBabelPlugin,
   DockerSPAPlugin,
   EslintImportOrderPlugin,
+  TypescriptNodePlugin,
+  TslintPlugin,
+  TsjestPlugin,
 ]
 
 async function runPlugin(plugin) {
