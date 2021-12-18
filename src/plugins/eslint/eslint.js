@@ -1,8 +1,8 @@
 import path from 'path'
 import {
   getPackageJson,
-  setPackageJson,
   hasDependency,
+  setPackageJson,
 } from '../../helpers/package'
 import {yarnInstallMissing} from '../../helpers/yarn'
 import {addLintStagedCommand} from '../../helpers/lintStaged'
@@ -15,6 +15,7 @@ export class EslintPlugin {
   async run() {
     const isCRA = hasDependency(getPackageJson(), 'react-scripts')
     const isRN = hasDependency(getPackageJson(), 'react-native')
+    const isTypescript = hasDependency(getPackageJson(), 'typescript')
 
     // In a create-react-app environment we do not need to install eslint
     if (isCRA) {
@@ -42,6 +43,20 @@ export class EslintPlugin {
         path.join(__dirname, 'data', 'eslintrc.react-native.json'),
         './.eslintrc.json'
       )
+    } else if (isTypescript) {
+      await yarnInstallMissing(
+        [
+          '@typescript-eslint/parser',
+          '@typescript-eslint/eslint-plugin',
+          'eslint',
+          'eslint-config-prettier',
+          'eslint-plugin-import'
+        ],
+        true
+      )
+
+
+
     } else {
       await yarnInstallMissing(
         [

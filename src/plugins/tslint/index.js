@@ -1,7 +1,7 @@
 import path from 'path'
 import {yarnInstallMissing} from '../../helpers/yarn'
 import {copyFile} from '../../helpers/basic'
-import {getPackageJson, setPackageJson} from '../../helpers/package'
+import {getPackageJson, setPackageJson, setScript} from '../../helpers/package'
 import {addLintStagedCommand} from '../../helpers/lintStaged'
 
 export class TslintPlugin {
@@ -15,6 +15,12 @@ export class TslintPlugin {
 
     const packageJson = getPackageJson()
     addLintStagedCommand(packageJson, 'tslint', 'tslint --fix', '*.ts', false)
+
+    setScript(
+      packageJson,
+      'lint',
+      `tslint --config tslint.json --project tsconfig.json`
+    )
 
     packageJson.husky = {
       hooks: {
